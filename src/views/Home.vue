@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <h1>Add a review</h1>
-    <button v-on:click="createReview()">Create!</button>
+    <div>
+      Reviewer: <input type="text" v-model="newReviewReviewer">
+      Rating: <input type="text" v-model="newReviewRating">
+      Text: <input type="text" v-model="newReviewText">
+      <button v-on:click="createReview()">Create!</button>
+    </div>
     <h1>Reviews</h1>
     <div v-for="review in reviews">
       <h3>{{ review.reviewer }} - {{ review.rating }}</h3>
@@ -19,6 +24,9 @@ export default {
     return {
       message: "Welcome to Vue.js!",
       peter: "yo",
+      newReviewReviewer: "",
+      newReviewRating: "",
+      newReviewText: "",
       reviews: [
         {
           id: 1,
@@ -46,9 +54,9 @@ export default {
     createReview: function() {
       var newReview = {
         id: 5,
-        text: "...whoa...",
-        rating: 5,
-        reviewer: "Keanu Reeves"
+        text: this.newReviewText,
+        rating: this.newReviewRating,
+        reviewer: this.newReviewReviewer
       };
       this.reviews.push(newReview);
     }
