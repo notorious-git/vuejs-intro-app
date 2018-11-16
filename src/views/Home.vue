@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <h1>{{ message + peter }}</h1>
-    <input type="text" v-model="message">
-    <h2>{{ 2 * 4 }}</h2>
+    <h1>Add a review</h1>
+    <button v-on:click="createReview()">Create!</button>
+    <h1>Reviews</h1>
     <div v-for="review in reviews">
       <h3>{{ review.reviewer }} - {{ review.rating }}</h3>
       <p>{{ review.text }}</p>
@@ -42,7 +42,17 @@ export default {
     };
   },
   created: function() {},
-  methods: {},
+  methods: {
+    createReview: function() {
+      var newReview = {
+        id: 5,
+        text: "...whoa...",
+        rating: 5,
+        reviewer: "Keanu Reeves"
+      };
+      this.reviews.push(newReview);
+    }
+  },
   computed: {}
 };
 </script>
