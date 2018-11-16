@@ -9,7 +9,7 @@
     </div>
     <h1>Reviews</h1>
     <div v-for="review in reviews">
-      <h3>{{ review.reviewer }} - {{ review.rating }}</h3>
+      <h3 v-on:click="destroyReview(review)">{{ review.reviewer }} - {{ review.rating }}</h3>
       <p>{{ review.text }}</p>
     </div>
   </div>
@@ -52,13 +52,25 @@ export default {
   created: function() {},
   methods: {
     createReview: function() {
-      var newReview = {
-        id: 5,
-        text: this.newReviewText,
-        rating: this.newReviewRating,
-        reviewer: this.newReviewReviewer
-      };
-      this.reviews.push(newReview);
+      if (this.newReviewText !== "") {
+        var newReview = {
+          id: 5,
+          text: this.newReviewText,
+          rating: this.newReviewRating,
+          reviewer: this.newReviewReviewer
+        };
+        this.reviews.push(newReview);
+        this.newReviewText = "";
+        this.newReviewRating = "";
+        this.newReviewReviewer = "";
+      }
+    },
+    destroyReview: function(inputReview) {
+      console.log("destroyReview");
+      var index = this.reviews.indexOf(inputReview);
+      if (index > -1) {
+        this.reviews.splice(index, 1);
+      }
     }
   },
   computed: {}
